@@ -91,6 +91,7 @@ public class Parser {
             assert input != null : "Input must not be null";
             assert user != null : "User object must not be null";
             assert sessionList != null : "Session list must not be null";
+            assert goalList != null : "Goal list must not be null";
 
         String[] sentence = {input, input};
         String command = input;
@@ -181,7 +182,7 @@ public class Parser {
             beginSegment();
             printUpcomingReminders(reminderList);
             break;
-        case "add goal":
+        case "add-goal":  // use "add-goal" consistently in input and command handling
             if (!description.isEmpty()) {
                 String[] goalParts = description.split(" ", 2);
                 String goalDescription = goalParts[0];
@@ -196,22 +197,37 @@ public class Parser {
                         return;
                     }
                 }
-                Goal newGoal = new Goal(goalDescription,
-                    goalDeadline); // Assuming Goal constructor takes description and deadline
-                goalList.add(newGoal); // Add the Goal object to the goalList
-                printAddedGoal(goalList); // Print added goal
+                Goal newGoal = new Goal(goalDescription, goalDeadline);
+                goalList.add(newGoal);
+                printAddedGoal(goalList);
             } else {
                 System.out.println("Please specify a goal to add.");
             }
             break;
-        case "delete goal":
-            int goalIndexToDelete = Integer.parseInt(description) - 1;
-            assert goalIndexToDelete >= 0
-                && goalIndexToDelete < goalList.size() : "Delete goal index out of bounds";
-            Goal goalToDelete = goalList.get(goalIndexToDelete);
-            goalList.remove(goalIndexToDelete);
-            printDeletedGoal(goalList,
-                goalToDelete.getDescription());
+
+        case "delete-goal":
+            try {
+                int index = Integer.parseInt(description) - 1;
+                if (index >= 0 && index < goalList.size()) {
+                    goalList.remove(index);
+                    System.out.println("Goal at index " + (index + 1) + " has been removed.");
+                } else {
+                    System.out.println("Invalid goal index.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please specify a valid index to delete.");
+            }
+            break;
+
+        case "list-goal":
+            if (goalList.isEmpty()) {
+                System.out.println("No goals to display.");
+            } else {
+                System.out.println("Goals:");
+                for (int i = 0; i < goalList.size(); i++) {
+                    System.out.println((i + 1) + ". " + goalList.get(i));
+                }
+            }
             break;
 
         default:

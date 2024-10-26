@@ -16,6 +16,9 @@ public class Messages {
     public static final String LIST_REMINDER_COMMAND = "list-remind";
     public static final String LIST_UPCOMING_REMINDER_COMMAND = "upcoming-remind";
     public static final String EXIT_COMMAND = "exit";
+    public static final String ADD_GOAL = "add_goal";
+    public static final String DELETE_GOAL = "delete_goal";
+    public static final String LIST_GOAL = "LIST_goal";
     public static final String PULL_UP_ACRONYM = "PU";
     public static final String SHUTTLE_RUN_ACRONYM = "SR";
     public static final String SIT_AND_REACH_ACRONYM = "SAR";
@@ -40,6 +43,10 @@ public class Messages {
             + "1"
             + System.lineSeparator() + "upcoming-remind                                                  "+
             "upcoming-remind"
+            + System.lineSeparator() + "add-goal (goal name) (deadline)                                  add-goal run" +
+            "12/12/2024 14:00:00"
+            + System.lineSeparator() + "delete-goal (goal index)                                         delete-goal 1"
+            + System.lineSeparator() + "list-goal                                                        list-goal"
             + System.lineSeparator() + "exit                                                             exit";
     public static final String LIST_SESSION_MESSAGE = "Here are your training sessions:";
     public static final String LIST_SESSION_EMPTY_MESSAGE = "Your session list is currently empty.";
@@ -51,6 +58,10 @@ public class Messages {
     public static final String ADD_REMINDER_MESSAGE = "Got it. I've added a new reminder";
     public static final String DELETE_REMINDER_MESSAGE = "Got it. I've deleted this reminder:";
     public static final String NO_UPCOMING_REMINDERS = "There are no reminders due in the next week.";
+
+    public static final String ADD_GOAL_MESSAGE = "Got it. I've added a new goal:";
+    public static final String DELETE_GOALS_MESSAGE = "Got it. I've deleted this goal.";
+    public static final String LIST_GOAL_MESSAGE = "Here is your goal list!";
 
     public static final String NONNUMERICAL_INDEX_MESSAGE = "Please provide a valid numerical index.";
     public static final String INDEX_OUT_OF_BOUNDS_MESSAGE = "Sorry, but that index is not within the list.";

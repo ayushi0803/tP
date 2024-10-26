@@ -4,7 +4,7 @@ import fittrack.calculator.ShuttleRunCalculator;
 import fittrack.user.User;
 
 public class ShuttleRunStation extends ExerciseStation {
-    private String name = "Shuttle Run Station";
+    private final String name = "Shuttle Run Station";
     private int time;
 
     public ShuttleRunStation() {

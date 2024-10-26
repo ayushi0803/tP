@@ -4,7 +4,7 @@ import fittrack.calculator.PullUpCalculator;
 import fittrack.user.User;
 
 public class PullUpStation extends ExerciseStation {
-    private String name = "Pull Up Station";
+    private final String name = "Pull Up Station";
     private int reps;
 
     public PullUpStation() {

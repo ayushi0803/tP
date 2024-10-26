@@ -4,7 +4,7 @@ import fittrack.calculator.WalkAndRunCalculator;
 import fittrack.user.User;
 
 public class WalkAndRunStation extends ExerciseStation {
-    private String name = "Walk and Run Station";
+    private final String name = "Walk and Run Station";
     private int time;
 
     public WalkAndRunStation() {

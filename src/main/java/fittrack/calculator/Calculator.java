@@ -56,7 +56,7 @@ public abstract class Calculator {
         try {
             pointsTable.put(new LookUpKey(gender, age), ageSubTable);
         } catch (InvalidAgeException e) {
-            System.out.println(e.getMessage());;
+            System.out.println(e.getMessage());
         }
     }
 

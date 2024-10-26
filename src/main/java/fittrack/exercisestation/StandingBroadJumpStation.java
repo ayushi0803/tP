@@ -4,7 +4,7 @@ import fittrack.calculator.StandingBroadJumpCalculator;
 import fittrack.user.User;
 
 public class StandingBroadJumpStation extends ExerciseStation {
-    private String name = "Standing Broad Jump Station";
+    private final String name = "Standing Broad Jump Station";
     private int distance;
 
     public StandingBroadJumpStation() {

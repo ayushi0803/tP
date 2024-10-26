@@ -4,7 +4,7 @@ import fittrack.calculator.SitAndReachCalculator;
 import fittrack.user.User;
 
 public class SitAndReachStation extends ExerciseStation {
-    private String name = "Sit and Reach Station";
+    private final String name = "Sit and Reach Station";
     private int length;
 
     public SitAndReachStation() {

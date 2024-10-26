@@ -100,7 +100,7 @@ public class Storage {
      *
      * @param sessionList The list of sessions to be saved.
      * @throws IOException If an I/O error occurs while writing to the file.
-     */
+     */ 
     public static void updateSaveFile(ArrayList<TrainingSession> sessionList) throws IOException {
         assert sessionList != null : "Session list must not be null";
 

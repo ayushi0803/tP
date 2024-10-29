@@ -44,7 +44,7 @@ public class Messages {
             + System.lineSeparator() + "upcoming-remind                                                  "+
             "upcoming-remind"
             + System.lineSeparator() + "add-goal (goal name) (deadline)                                  add-goal run" +
-            "12/12/2024 14:00:00"
+            " 12/12/2024 14:00:00"
             + System.lineSeparator() + "delete-goal (goal index)                                         delete-goal 1"
             + System.lineSeparator() + "list-goal                                                        list-goal"
             + System.lineSeparator() + "exit                                                             exit";

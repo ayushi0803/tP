@@ -126,12 +126,4 @@ public class Storage {
             }
         }
     }
-    public static void updateGoalsFile(ArrayList<Goal> goals) throws IOException {
-        try (FileWriter fw = new FileWriter(SAVEFILE, true)) {
-            fw.write("Goals:\n");
-            for (Goal goal : goals) {
-                fw.write(goal.toString() + "\n");
-            }
-        }
-    }
 }

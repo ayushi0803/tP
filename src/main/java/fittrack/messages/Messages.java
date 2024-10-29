@@ -34,7 +34,7 @@ public class Messages {
             + System.lineSeparator() + "add (session name)                                               add session1"
             + System.lineSeparator() + "list                                                             list"
             + System.lineSeparator() + "view (session index)                                             view 1"
-            + System.lineSeparator() + "edit (session index) (exercise index) (repetitions/time)         edit 1 1 1"
+            + System.lineSeparator() + "edit (session index) (exercise acronym) (repetitions/time)       edit 1 PU 1"
             + System.lineSeparator() + "delete (session index)                                           delete 1"
             + System.lineSeparator() + "remind (Event / Task) (deadline)                                 remind " +
             "NAPFA DD/MM/YYYY"

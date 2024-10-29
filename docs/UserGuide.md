@@ -1,71 +1,178 @@
-# User Guide
+# FitTrackCLI User Guide
 
 ## Introduction
 
-{Give a product intro}
+FitTrackCLI is command-line-based chatbot to help users manage their NAPFA related exercises and goals!
+The user can:
+1. Record and track training sessions.
+2. Calculate NAPFA scores from training sessions.
+3. Set fitness goals.
+4. Visualise their training progress.
 
-## Quick Start
+The NAPFA score sheet used for this chatbot can be found here:
+This guide will bring you through the various features of FitTrackCLI, and how to utilise them!
 
-{Give steps to get started quickly}
+## FitTrackCLI's Features
 
-1. Ensure that you have Java 17 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+### 1. User initialisation: `set`
 
-## Features 
+**Purpose**: Set the age and gender of the user.
 
-{Give detailed description of each feature}
+**Format**: `set [gender]  [age]`
+- `gender` and `age` field must be non-empty. Gender must be "male" or "female". Age must be an integer.
 
-1. add-goal: User can add a fitness goal to the the list
-   of goals and attach a deadline to it in order to
-   have clear targets to prepare for the NAPFA test.
+**Example**: `male 12`
 
-Input Command:
-add-goal (goal name) (deadline)
+**Expected output**:
+```
+____________________________________________________________________________________________________
+You are a 12 year old male.
+____________________________________________________________________________________________________
+```
 
-Example Usage:
-add-goal run 12/12/2024 14:00:00
+### 2. Help Function: `help`
+**Purpose**: Prints a complete list of valid commands.
 
-2. delete-goal: User can delete a fitness goal to the the list
-   of goals to moderate a fitness goal.
+**Format**: `help`
 
-Input Command:
-delete-goal (goal index)
+**Expected output**:
+```
+____________________________________________________________________________________________________
+COMMAND                                                          EXAMPLE
+help                                                             help
+set (gender) (age)                                               set male 12
+add (session name)                                               add session1
+list                                                             list
+view (session index)                                             view 1
+edit (session index) (exercise acronym) (repetitions/time)       edit 1 PU 1
+delete (session index)                                           delete 1
+remind (Event / Task) (deadline)                                 remind NAPFA DD/MM/YYYY
+list-remind                                                      list-remind 
+delete-remind (reminder index)                                   delete-remind1
+upcoming-remind                                                  upcoming-remind
+add-goal (goal name) (deadline)                                  add-goal run 12/12/2024 14:00:00
+delete-goal (goal index)                                         delete-goal 1
+list-goal                                                        list-goal
+exit                                                             exit
+____________________________________________________________________________________________________
+```
 
-Example Usage:   
-delete-goal 1
+### 3. Add a Training Session: `add`
+**Purpose**: Adds a Training Session with the specified name.
 
-3. list-goal: View a list of all fitness goals and deadlines
-   to keep track of progress in preparation for the NAPFA test
+**Format**: `add [session name]`
+- `session name` field must be non-empty.
 
-Input Command:
-list-goal
+**Example**: `add session1`
 
-Example Usage:
-list-goal
+**Expected output**:
+```
+____________________________________________________________________________________________________
+Got it. I've added a new training session:
+1. session1 | 29/10/2024 12:40
+There are 1 sessions in the list.
+____________________________________________________________________________________________________
+```
 
+### 4. List all Training Sessions: `list`
+**Purpose**: Displays all Training Sessions the user has added.
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+**Format**: `list`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+**Example Output**:
+```
+____________________________________________________________________________________________________
+Here are your training sessions:
+1. session1 | 29/10/2024 12:40
+2. session2 | 29/10/2024 12:41
+There are 2 sessions in the list.
+____________________________________________________________________________________________________
+```
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+### 5. View a Training Session: `view`
+**Purpose**: View the details of a Training Session, including session name, datetime, exercise data, points and awards.
 
-Example of usage: 
+**Format**: `view [session index]`
 
-`todo n/Write the rest of the User Guide d/next week`
+**Example**: `view 1`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+**Expected Output**:
+```
+____________________________________________________________________________________________________
+Training Session: session1
+Training Datetime: 29/10/2024 12:40
+Pull Up Station | Reps: 0 | 0 points
+Shuttle Run Station | Time: NA | 0 points
+Sit and Reach Station | Distance: 0cm | 0 points
+Sit Up Station | Reps: 0 | 0 points
+Standing Broad Jump Station | Distance: 0cm | 0 points
+Walk and Run Station | Time: NA | 0 points
+Total points: 0
+Overall Award: No Award
+____________________________________________________________________________________________________
+```
 
-## FAQ
+### 6. Edit a Training Session: `edit`
+**Purpose**: Edit the details of a training session, namely exercise and reps/time.
 
-**Q**: How do I transfer my data to another computer? 
+**Format**: `edit [session index] [exercise acronym] [repetitions/time]`
 
-**A**: {your answer here}
+**Example**: `edit 1 PU 45`
 
-## Command Summary
+**Expected Output**:
+```
+1
+Exercise edited! Here's your new input: Reps: 45 | 5 points
+____________________________________________________________________________________________________
+Training Session: session1
+Training Datetime: 29/10/2024 12:40
+Pull Up Station | Reps: 45 | 5 points
+Shuttle Run Station | Time: NA | 0 points
+Sit and Reach Station | Distance: 0cm | 0 points
+Sit Up Station | Reps: 0 | 0 points
+Standing Broad Jump Station | Distance: 0cm | 0 points
+Walk and Run Station | Time: NA | 0 points
+Total points: 5
+Overall Award: No Award
+____________________________________________________________________________________________________
+```
 
-{Give a 'cheat sheet' of commands here}
+### 7. Deleting a Training Session: `delete`
+**Purpose**: Removes a task from your list.
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+**Format**: `delete [session index]`
+
+**Example**: `delete 1`
+
+**Expected Output**:
+```
+____________________________________________________________________________________________________
+Got it. I've deleted this training session:session1 | 29/10/2024 12:40
+There are 1 sessions in the list.
+____________________________________________________________________________________________________
+```
+
+### 8. Exiting the program: `exit`
+**Purpose**: Ends FitTrack CLI task and exits.
+
+**Format**: `exit`
+
+**Expected Output**:
+```
+____________________________________________________________________________________________________
+Bye! Hope to see you again soon!
+____________________________________________________________________________________________________
+```
+
+## FitTrackCLI's Command Summary
+| Command    | Format                                                         | Example        |
+|------------|----------------------------------------------------------------|----------------|
+| **help**   | `help`                                                         | `help`         |
+| **set**    | `set GENDER AGE`                                               | `set male 12`  |
+| **add**    | `add SESSION_NAME`                                             | `add session1` |
+| **list**   | `list`                                                         | `list`         |
+| **view**   | `view SESSION_INDEX`                                           | `view 1`       |
+| **edit**   | `edit SESSION_INDEX EXERCISE_ACRONYM REPETITION/TIME_DURATION` | `edit 1 PU 45` |
+| **delete** | `delete SESSION_INDEX `                                        | `delete 1 `    |
+| **exit**   | `exit`                                                         | `exit`         |
+

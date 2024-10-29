@@ -12,7 +12,7 @@ public class DeleteFitnessGoal {
 
     public void deleteGoal(User user) {
         boolean deleted = user.deleteGoal(
-            goalDescription); // Assume this method is updated in User to find and delete by description
+              goalDescription); // Assume this method is updated in User to find and delete by description
         if (deleted) {
             System.out.println("Deleted goal: " + goalDescription);
         } else {

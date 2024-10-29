@@ -34,7 +34,7 @@ public class Messages {
             + System.lineSeparator() + "add (session name)                                               add session1"
             + System.lineSeparator() + "list                                                             list"
             + System.lineSeparator() + "view (session index)                                             view 1"
-            + System.lineSeparator() + "edit (session index) (exercise acronym) (repetitions/time)       edit 1 PU 1"
+            + System.lineSeparator() + "edit (session index) (exercise index) (repetitions/time)         edit 1 1 1"
             + System.lineSeparator() + "delete (session index)                                           delete 1"
             + System.lineSeparator() + "remind (Event / Task) (deadline)                                 remind " +
             "NAPFA DD/MM/YYYY"
@@ -44,7 +44,7 @@ public class Messages {
             + System.lineSeparator() + "upcoming-remind                                                  "+
             "upcoming-remind"
             + System.lineSeparator() + "add-goal (goal name) (deadline)                                  add-goal run" +
-            " 12/12/2024 14:00:00"
+            "12/12/2024 14:00:00"
             + System.lineSeparator() + "delete-goal (goal index)                                         delete-goal 1"
             + System.lineSeparator() + "list-goal                                                        list-goal"
             + System.lineSeparator() + "exit                                                             exit";

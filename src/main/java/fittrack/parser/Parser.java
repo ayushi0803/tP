@@ -41,14 +41,13 @@ import static fittrack.ui.Ui.printUser;
 public class Parser {
 
     /**
-     * Parses the user's input and calls the corresponding method based on the command.
-     *
-     * @param user The user object to be manipulated based on the command.
-     * @param input The input string entered by the user.
-     * @param sessionList The list of sessions to be manipulated based on the command.
-     * @param reminderList The list of reminders to be manipulated based on the command.
-     */
-
+    * Parses the user's input and calls the corresponding method based on the command.
+    *
+    * @param user The user object to be manipulated based on the command.
+    * @param input The input string entered by the user.
+    * @param sessionList The list of sessions to be manipulated based on the command.
+    * @param reminderList The list of reminders to be manipulated based on the command.
+    */
     private static void printGoalList(ArrayList<String> goalList) {
         if (goalList.isEmpty()){
             System.out.println("Your goals list is currently empty.");
@@ -88,12 +87,11 @@ public class Parser {
     }
 
     public static void parse(User user, String input, ArrayList<TrainingSession> sessionList,
-                             ArrayList<Reminder> reminderList, ArrayList<Goal> goalList) {
-        assert input != null : "Input must not be null";
-        assert user != null : "User object must not be null";
-        assert sessionList != null : "Session list must not be null";
-        assert goalList != null : "Goal list must not be null";
-
+        ArrayList<Reminder> reminderList, ArrayList<Goal> goalList) {
+            assert input != null : "Input must not be null";
+            assert user != null : "User object must not be null";
+            assert sessionList != null : "Session list must not be null";
+            assert goalList != null : "Goal list must not be null";
 
         String[] sentence = {input, input};
         String command = input;
@@ -130,11 +128,11 @@ public class Parser {
             int sessionIndex = Integer.parseInt(sentence[0]) - 1;
             String exerciseAcronym = sentence[1];
             String exerciseData = sentence[2];
-            assert sessionIndex >= 0 && sessionIndex < sessionList.size() : "Session index out of bounds";
+            assert
+                sessionIndex >= 0 && sessionIndex < sessionList.size() : "Session index out of bounds";
             try {
                 sessionList.get(sessionIndex).editExercise(fromUserInput(exerciseAcronym), exerciseData);
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             printSessionView(sessionList, sessionIndex);
@@ -144,12 +142,14 @@ public class Parser {
             break;
         case VIEW_SESSION_COMMAND:
             int viewIndex = Integer.parseInt(description) - 1;
-            assert viewIndex >= 0 && viewIndex < sessionList.size() : "View session index out of bounds";
+            assert
+                viewIndex >= 0 && viewIndex < sessionList.size() : "View session index out of bounds";
             printSessionView(sessionList, viewIndex); // Print the session view
             break;
         case DELETE_SESSION_COMMAND:
             int indexToDelete = Integer.parseInt(description) - 1;
-            assert indexToDelete >= 0 && indexToDelete < sessionList.size() : "Delete session index out of bounds";
+            assert indexToDelete >= 0
+                && indexToDelete < sessionList.size() : "Delete session index out of bounds";
             TrainingSession sessionToDelete = sessionList.get(indexToDelete);
             sessionList.remove(indexToDelete);
             printDeletedSession(sessionList, sessionToDelete);
@@ -168,7 +168,8 @@ public class Parser {
             break;
         case DELETE_REMINDER_COMMAND:
             int reminderIndexToDelete = Integer.parseInt(description) - 1;
-            assert reminderIndexToDelete >= 0 && reminderIndexToDelete < reminderList.size() : "Delete reminder index "
+            assert reminderIndexToDelete >= 0 && reminderIndexToDelete < reminderList.size() :
+                "Delete reminder index "
                     + "out of bounds";
             Reminder reminderToDelete = reminderList.get(reminderIndexToDelete);
             reminderList.remove(reminderIndexToDelete);
@@ -181,7 +182,6 @@ public class Parser {
             beginSegment();
             printUpcomingReminders(reminderList);
             break;
-
         case "add-goal":  // use "add-goal" consistently in input and command handling
             if (!description.isEmpty()) {
                 String[] goalParts = description.split(" ", 2);
@@ -237,7 +237,7 @@ public class Parser {
     }
 
     private static LocalDateTime parseGoalDeadline(String inputDeadline)
-            throws IllegalArgumentException {
+                throws IllegalArgumentException {
         try {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");

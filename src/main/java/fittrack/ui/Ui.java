@@ -53,7 +53,7 @@ public class Ui {
 
         beginSegment();
         System.out.println("You are a " + user.getAge() + " year old "
-                + user.getGender().toString().toLowerCase() + ".");
+            + user.getGender().toString().toLowerCase() + ".");
         endSegment();
     }
 
@@ -213,4 +213,3 @@ public class Ui {
         endSegment();
     }
 }
-

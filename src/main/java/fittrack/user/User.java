@@ -9,12 +9,10 @@ public class User {
     public int age;
     private final ArrayList<Goal> goals;
 
-
     public User(String gender, String age) {
         this.gender = Gender.valueOf(gender.toUpperCase());
         this.age = Integer.parseInt(age);
         this.goals = new ArrayList<>();
-
     }
 
     public void setGender(String gender) {

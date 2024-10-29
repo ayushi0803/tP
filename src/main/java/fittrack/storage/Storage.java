@@ -54,8 +54,8 @@ public class Storage {
             throw new RuntimeException(e);
         }
 
-        // Assert that the file exists after initialization
-        assert file.exists() : "Save file should exist after initialization";
+      // Assert that the file exists after initialization
+      assert file.exists() : "Save file should exist after initialization";
     }
 
     /**
@@ -71,9 +71,6 @@ public class Storage {
         Scanner s = new Scanner(SAVEFILE); // Create a Scanner to read the save file
         while (s.hasNext()) {
             String line = s.nextLine(); // Read each line from the file
-
-            // IMPLEMENT READ SAVE FILE HERE
-
         }
 
         // Assert that the session list is populated after loading (if applicable)
@@ -83,14 +80,28 @@ public class Storage {
         LOGGER.info("Save file successfully loaded.");
     }
 
+    public static void loadSaveFile(ArrayList<TrainingSession> sessionList,
+        ArrayList<String> goalList) throws FileNotFoundException {
+        Scanner s = new Scanner(SAVEFILE);
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            if (line.startsWith("Goals:")) {
+                while (s.hasNext() && !(line = s.nextLine()).isEmpty()) {
+                    goalList.add(line);
+                }
+            }
+        }
+        System.out.println("Save file successfully loaded.");
+        LOGGER.info("Save file successfully loaded.");
+    }
+
     /**
      * Updates the save file with the current list of sessions.
      *
      * @param sessionList The list of sessions to be saved.
      * @throws IOException If an I/O error occurs while writing to the file.
-     */
+     */ 
     public static void updateSaveFile(ArrayList<TrainingSession> sessionList) throws IOException {
-        // Assert that the session list is not null before saving
         assert sessionList != null : "Session list must not be null";
 
         try (FileWriter fw = new FileWriter(SAVEFILE)) {
@@ -103,8 +114,17 @@ public class Storage {
             }
         }
 
-        // Assert that the file has been written to successfully
-        assert SAVEFILE.length() > 0 : "Save file should not be empty after update";
+      // Assert that the file has been written to successfully
+      assert SAVEFILE.length() > 0 : "Save file should not be empty after update";
+    }
+    @SuppressWarnings("checkstyle:Indentation")
+    public static void updateGoalsFile(ArrayList<Goal> goals) throws IOException {
+        try (FileWriter fw = new FileWriter(SAVEFILE, true)) {
+            fw.write("Goals:\n");
+            for (Goal goal : goals) {
+                fw.write(goal.toString() + "\n");
+            }
+        }
     }
     public static void updateGoalsFile(ArrayList<Goal> goals) throws IOException {
         try (FileWriter fw = new FileWriter(SAVEFILE, true)) {

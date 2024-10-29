@@ -30,11 +30,11 @@ public class TrainingSession{
     static final String BRONZE_STRING = "Bronze";
     static final String NO_AWARD = "No Award";
 
-    private LocalDateTime sessionDatetime;
-    private String sessionDescription;
-    private User user;
+    private final LocalDateTime sessionDatetime;
+    private final String sessionDescription;
+    private final User user;
 
-    private Map<Exercise, ExerciseStation> exerciseStations = new EnumMap<>(Exercise.class);
+    private final Map<Exercise, ExerciseStation> exerciseStations = new EnumMap<>(Exercise.class);
 
     public TrainingSession(LocalDateTime datetime, String sessionDescription, User user) {
         this.sessionDatetime = datetime;

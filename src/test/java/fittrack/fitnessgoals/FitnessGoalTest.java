@@ -6,7 +6,7 @@ import fittrack.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream; 
+import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 
@@ -14,16 +14,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FitnessGoalTest {
 
-      private final String goalDescription = "Run 5km in under 30 minutes";
-      private final LocalDateTime testDeadline = LocalDateTime.parse("2024-12-22T23:45:44");
-      private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-      private User testUser; // Declare testUser here
+    private final String goalDescription = "Run 5km in under 30 minutes";
+    private final LocalDateTime testDeadline = LocalDateTime.parse("2024-12-22T23:45:44");
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private User testUser; // Declare testUser here
 
-      @BeforeEach
+    @BeforeEach
       public void setUp() {
-      System.setOut(new PrintStream(outContent));
-      testUser = new User("FEMALE", "25"); // Initialize the User instance here
-      }
+          System.setOut(new PrintStream(outContent));
+          testUser = new User("FEMALE", "25"); // Initialize the User instance here
+          }
 
     // Test for adding a goal
     @Test

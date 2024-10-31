@@ -164,6 +164,60 @@ Bye! Hope to see you again soon!
 ____________________________________________________________________________________________________
 ```
 
+### 9. Add Goal: `add-goal`
+**Purpose**: User can add a fitness goal to the the list
+of goals and attach a deadline to it in order to
+have clear targets to prepare for the NAPFA test.
+
+**Format**: `add-goal (goal name) (deadline)`
+
+**Example**: `add-goal run 12/12/2024 14:00:00`
+
+**Expected Output**:
+```
+____________________________________________________________________________________________________
+Goal added: run
+Deadline: 12/12/2024 14:00:00
+____________________________________________________________________________________________________
+```
+
+### 10. Delete Goal: `delete-goal`
+User can delete a fitness goal to the the list
+of goals to moderate a fitness goal.
+
+**Format**: `delete-goal (goal index)`
+
+**Example**: `delete-goal 1`
+
+**Expected Output**:
+```
+____________________________________________________________________________________________________
+Goal at index 1 has been removed.
+____________________________________________________________________________________________________
+```
+
+### 11. List of Goals: `list-goal`
+View a list of all fitness goals and deadlines
+to keep track of progress in preparation for the NAPFA test
+
+Input Command:
+list-goal
+
+Example Usage:
+list-goal
+
+**Format**: `list-goal`
+
+**Example**: `list-goal`
+
+**Expected Output**:
+```
+____________________________________________________________________________________________________
+Goals:
+1. Goal: run, Deadline: 2024-12-12T14:00
+____________________________________________________________________________________________________
+```
+
 ## FitTrackCLI's Command Summary
 | Command    | Format                                                         | Example        |
 |------------|----------------------------------------------------------------|----------------|
@@ -175,4 +229,11 @@ ________________________________________________________________________________
 | **edit**   | `edit SESSION_INDEX EXERCISE_ACRONYM REPETITION/TIME_DURATION` | `edit 1 PU 45` |
 | **delete** | `delete SESSION_INDEX `                                        | `delete 1 `    |
 | **exit**   | `exit`                                                         | `exit`         |
+| **add-goal**    | `add-goal GOAL_NAME DEADLINE`                                  | `add-goal run 12/12/2024 14:00:00` |
+| **delete-goal** | `delete-goal GOAL_INDEX`                                       | `delete-goal 1`                    |
+| **list-goal**   | `list-goal`                                                    | `list-goal`                        |
+
+
+
+
 

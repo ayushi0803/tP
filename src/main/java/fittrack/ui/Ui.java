@@ -66,11 +66,11 @@ public class Ui {
     public static void printAddedSession(ArrayList<TrainingSession> sessionList) {
         assert sessionList != null : "Session list must not be null";
         assert !sessionList.isEmpty() : "Session list must not be empty";
+        int sessionIndex = sessionList.size() - 1;
 
         beginSegment();
         System.out.println(ADD_SESSION_MESSAGE);
-        System.out.print(sessionList.size() + ". ");
-        sessionList.get(sessionList.size() - 1).printSessionDescription();
+        System.out.println(sessionList.size() + ". " + sessionList.get(sessionIndex).getSessionDescription());
         printSessionCount(sessionList);
         endSegment();
     }
@@ -81,7 +81,7 @@ public class Ui {
 
         beginSegment();
         System.out.print(DELETE_SESSION_MESSAGE);
-        sessionToDelete.printSessionDescription();
+        System.out.println(sessionToDelete.getSessionDescription());
         printSessionCount(sessionList);
         endSegment();
     }
@@ -99,7 +99,7 @@ public class Ui {
         System.out.println(LIST_SESSION_MESSAGE);
         while (index < sessionList.size()) {
             System.out.print(index + 1 + ". ");
-            sessionList.get(index).printSessionDescription();
+            System.out.println(sessionList.get(index).getSessionDescription());
             index++;
         }
         printSessionCount(sessionList);

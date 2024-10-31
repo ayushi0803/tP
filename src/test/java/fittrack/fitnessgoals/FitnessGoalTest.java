@@ -19,7 +19,7 @@ public class FitnessGoalTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private User testUser; // Declare testUser here
 
-    @BeforeEach.  
+    @BeforeEach
       public void setUp() {
           System.setOut(new PrintStream(outContent));
           testUser = new User("FEMALE", "25"); // Initialize the User instance here

@@ -296,9 +296,6 @@ to keep track of progress in preparation for the NAPFA test
 Input Command:
 list-goal
 
-Example Usage:
-list-goal
-
 **Format**: `list-goal`
 
 **Example**: `list-goal`

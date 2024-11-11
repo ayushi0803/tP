@@ -1,8 +1,6 @@
 package fittrack.healthprofile;
 
-import fittrack.healthprofile.FoodEntry;
-import fittrack.healthprofile.FoodWaterIntake;
-import fittrack.healthprofile.WaterEntry;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -61,6 +61,7 @@ public class Goal extends Saveable {
      * @throws IllegalArgumentException If the format of `saveString` is invalid or does not match the expected format.
      */
     public static Goal fromSaveString(String saveString) {
+
         // Split the string by the " | " delimiter
         String[] stringData = saveString.split(" \\| ");
         String[] parts = saveString.split(";");
@@ -72,6 +73,7 @@ public class Goal extends Saveable {
 
         String goalDescription = stringData[1];
         LocalDateTime goalDeadline = null; // Default to null if no deadline is provided
+
 
         // Check if the deadline is present and parse it if available
         if (stringData.length > 2) {

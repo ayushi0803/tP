@@ -274,22 +274,7 @@ Deadline: 12/12/2024 14:00:00
 ____________________________________________________________________________________________________
 ```
 
-### 15. Delete Goal: `delete-goal`
-User can delete a fitness goal to the the list
-of goals to moderate a fitness goal.
-
-**Format**: `delete-goal (goal index)`
-
-**Example**: `delete-goal 1`
-
-**Expected Output**:
-```
-____________________________________________________________________________________________________
-Goal at index 1 has been removed.
-____________________________________________________________________________________________________
-```
-
-### 16. List of Goals: `list-goal`
+### List of Goals: `list-goal`
 View a list of all fitness goals and deadlines
 to keep track of progress in preparation for the NAPFA test
 
@@ -305,6 +290,20 @@ list-goal
 ____________________________________________________________________________________________________
 Goals:
 1. Goal: run, Deadline: 2024-12-12T14:00
+____________________________________________________________________________________________________
+```
+### 16. Delete Goal: `delete-goal`
+User can delete a fitness goal to the the list
+of goals to moderate a fitness goal.
+
+**Format**: `delete-goal (goal index)`
+
+**Example**: `delete-goal 1`
+
+**Expected Output**:
+```
+____________________________________________________________________________________________________
+Goal at index 1 has been removed.
 ____________________________________________________________________________________________________
 ```
 

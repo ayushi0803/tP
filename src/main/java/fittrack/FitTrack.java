@@ -19,6 +19,7 @@ import static fittrack.logger.FitTrackLogger.setupLogger;
 import static fittrack.messages.Messages.EXIT_COMMAND;
 import static fittrack.storage.Storage.initialiseSaveFile;
 import static fittrack.storage.Storage.loadSaveFile;
+import static fittrack.storage.Storage.updateSaveFile;
 import static fittrack.ui.Ui.printExitMessage;
 import static fittrack.ui.Ui.printGreeting;
 import static fittrack.ui.Ui.printHelp;
@@ -43,7 +44,7 @@ public class FitTrack {
         initialiseSaveFile();
         loadSaveFile(saveableList);
 
-        // Initialize separate Goal/Reminder/Training Session lists for easier access if needed
+        // Initialize separate Goal/Reminder/Training Session lists for easier access
         ArrayList<TrainingSession> sessionList = new ArrayList<>();
         ArrayList<Reminder> reminderList = new ArrayList<>();
         ArrayList<Goal> goalList = new ArrayList<>();
@@ -51,9 +52,14 @@ public class FitTrack {
         // Initialise Food/Water lists
         FoodWaterIntake foodWaterList = new FoodWaterIntake();
 
-        // Separate saveable items into specific lists based on their type
+        // Set user gender and age
+        User user = null;
+
+        // Separate saveable items into specific lists based on their type / set user if data is found detected
         for (Saveable item : saveableList) {
-            if (item instanceof TrainingSession) {
+            if (item instanceof User) {
+                user = (User) item;
+            } else if (item instanceof TrainingSession) {
                 sessionList.add((TrainingSession) item);
             } else if (item instanceof Reminder) {
                 reminderList.add((Reminder) item);
@@ -66,11 +72,10 @@ public class FitTrack {
             }
         }
 
-        printGreeting();
 
-        // Set user gender and age
-        User user = null;
+        // If no user data detected, prompt user for user information
         while(user == null) {
+            printGreeting();
             try {
                 String userInput = scan.nextLine();
                 if(userInput.trim().equals(EXIT_COMMAND)) {
@@ -78,8 +83,10 @@ public class FitTrack {
                     return;
                 }
                 String[] userInfo = parseUserInfo(userInput);
-                user = validUser(userInfo[0].trim(), userInfo[1].trim());
+                validUser(userInfo[0].toLowerCase(), userInfo[1]);
+                user = new User(userInfo[0].toLowerCase(), userInfo[1]);
                 printUser(user.getAge(), user.getGender().toString().toLowerCase());
+                updateSaveFile(user, sessionList, goalList, reminderList,  foodWaterList);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -93,7 +100,7 @@ public class FitTrack {
         String input = scan.nextLine();
 
         // Until the exit command is entered, execute command then read user input
-        while (!input.trim().equals(EXIT_COMMAND)) {
+        while (!input.toLowerCase().trim().equals(EXIT_COMMAND)) {
             Parser.parse(user, input, sessionList, reminderList, goalList, foodWaterList);
             input = scan.nextLine();
         }

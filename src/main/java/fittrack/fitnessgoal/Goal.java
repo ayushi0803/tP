@@ -1,5 +1,7 @@
 package fittrack.fitnessgoal;
 import static fittrack.logger.FitTrackLogger.LOGGER;
+import static fittrack.storage.Storage.DATA_DELIMITER;
+import static fittrack.storage.Storage.DATA_DELIMITER_REGEX;
 
 import fittrack.storage.Saveable;
 
@@ -45,7 +47,7 @@ public class Goal extends Saveable {
      */
     @Override
     public String toSaveString() {
-        return "Goal" + " | " + description + " | " + (deadline != null ?
+        return "Goal" + DATA_DELIMITER + description + DATA_DELIMITER + (deadline != null ?
                 deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) : "");
     }
 

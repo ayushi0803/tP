@@ -1,10 +1,15 @@
 package fittrack.user;
 import fittrack.enums.Gender;
 import fittrack.fitnessgoal.Goal;
+import fittrack.storage.Saveable;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class User {
+import static fittrack.storage.Storage.DATA_DELIMITER;
+import static fittrack.storage.Storage.DATA_DELIMITER_REGEX;
+
+public class User extends Saveable {
 
     public Gender gender;  // User's gender
     public int age;         // User's age
@@ -111,5 +116,35 @@ public class User {
     @Override
     public String toString () {
         return gender + " " + age;  // Return gender and age as a string
+    }
+
+    @Override
+    public String toSaveString() {
+        return "User" + DATA_DELIMITER + gender.toString() + DATA_DELIMITER + age;
+    }
+
+    public static User fromSaveString(String saveString) {
+        // Split the string by the '|' delimiter
+        String[] stringData = saveString.split(DATA_DELIMITER_REGEX);
+
+        try {
+            // Check if the format is correct
+            if (stringData.length != 3 || !stringData[0].equals("User")) {
+                throw new IllegalArgumentException("Invalid save data for user detected");
+            }
+
+            if (!stringData[1].equals("MALE") && !stringData[2].equals("FEMALE")) {
+                throw new IllegalArgumentException("Invalid stored sex information for user detected");
+            }
+
+            if (Integer.parseInt(stringData[2]) >= 25) {
+                throw new IllegalArgumentException("Invalid stored age information for user detected");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return new User(stringData[1], stringData[2]);
     }
 }

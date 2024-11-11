@@ -17,6 +17,8 @@ import java.util.EnumMap;
 import java.util.Map;
 
 import static fittrack.messages.Messages.DEFAULT_MOOD_MSG;
+import static fittrack.storage.Storage.DATA_DELIMITER;
+import static fittrack.storage.Storage.DATA_DELIMITER_REGEX;
 
 public class TrainingSession extends Saveable {
 
@@ -218,9 +220,10 @@ public class TrainingSession extends Saveable {
         String infoSU = exerciseStations.get(Exercise.SIT_UP).getSaveStringInfo();
         String infoWAR = exerciseStations.get(Exercise.WALK_AND_RUN).getSaveStringInfo();
 
-        return "TrainingSession" + "|" + sessionInfo + "|" + sessionDateTime + "|" + userSex + "|" + userAge + "|"
-                + moodInfo + "|" + infoPU + "|" + infoSBJ +  "|" + infoSR + "|" + infoSAR + "|" + infoSU + "|"
-                + infoWAR + "|";
+        return "TrainingSession" + DATA_DELIMITER + sessionInfo + DATA_DELIMITER + sessionDateTime + DATA_DELIMITER
+                + userSex + DATA_DELIMITER + userAge + DATA_DELIMITER + moodInfo + DATA_DELIMITER + infoPU
+                + DATA_DELIMITER + infoSBJ + DATA_DELIMITER + infoSR + DATA_DELIMITER + infoSAR + DATA_DELIMITER
+                + infoSU + DATA_DELIMITER + infoWAR;
     }
 
     /**
@@ -234,7 +237,7 @@ public class TrainingSession extends Saveable {
      *                                  invalid date-time data.
      */
     public static TrainingSession fromSaveString(String saveString) throws InvalidSaveDataException {
-        String[] stringData = saveString.split("\\|");
+        String[] stringData = saveString.split(DATA_DELIMITER_REGEX);
 
         // Check for all exercise data is present (including Item-Type/description/DateTime/Mood information)
         if (stringData.length < (NUM_OF_EXERCISES+NUM_OF_NON_EXERCISE_FIELDS)) {

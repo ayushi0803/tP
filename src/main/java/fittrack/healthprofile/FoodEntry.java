@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
+import static fittrack.storage.Storage.DATA_DELIMITER;
+import static fittrack.storage.Storage.DATA_DELIMITER_REGEX;
+
 public class FoodEntry extends Saveable {
     private String foodName;        // Name of the food item
     private int calories;           // Calorie content of the food item
@@ -71,7 +74,7 @@ public class FoodEntry extends Saveable {
      */
     @Override
     public String toSaveString() {
-        return "Food" + "|" + foodName + "|" + calories + "|" + getFormattedDateTime();
+        return "Food" + DATA_DELIMITER + foodName + DATA_DELIMITER + calories + DATA_DELIMITER + getFormattedDateTime();
     }
 
     /**
@@ -82,7 +85,7 @@ public class FoodEntry extends Saveable {
      * @throws IllegalArgumentException if the save string format is invalid.
      */
     public static FoodEntry fromSaveString(String saveString) {
-        String[] stringData = saveString.split("\\|");
+        String[] stringData = saveString.split(DATA_DELIMITER_REGEX);
 
         // Validate the save string format
         if (stringData.length < 4 || !stringData[0].equals("Food")) {

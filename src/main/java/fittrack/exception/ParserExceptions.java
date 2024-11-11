@@ -29,8 +29,15 @@ import static fittrack.messages.Messages.INVALID_STANDING_BROAD_JUMP_DISTANCE_ME
 import static fittrack.messages.Messages.INVALID_USER_INFO_MESSAGE;
 import static fittrack.messages.Messages.INVALID_WALK_AND_RUN_TIMING_MESSAGE;
 import static fittrack.messages.Messages.MALE_GENDER;
+import static fittrack.messages.Messages.PULL_UP_ACRONYM;
+import static fittrack.messages.Messages.SHUTTLE_RUN_ACRONYM;
+import static fittrack.messages.Messages.SIT_AND_REACH_ACRONYM;
+import static fittrack.messages.Messages.SIT_UP_ACRONYM;
+import static fittrack.messages.Messages.STANDING_BROAD_JUMP_ACRONYM;
+import static fittrack.messages.Messages.WALK_AND_RUN_ACRONYM;
 
 public class ParserExceptions extends RuntimeException {
+
     public static String[] parseUserInfo(String userInput) {
         if (!userInput.contains(" ")) {
             throw new IllegalArgumentException(INVALID_USER_INFO_MESSAGE);
@@ -42,14 +49,13 @@ public class ParserExceptions extends RuntimeException {
         return userInfo;
     }
 
-    public static User validUser(String gender, String age) {
+    public static void validUser(String gender, String age) {
         if (!(gender.equals(MALE_GENDER) || gender.equals(FEMALE_GENDER))) {
             throw new IllegalArgumentException(INVALID_USER_INFO_MESSAGE);
         }
         if (stringToValidInteger(age) < 12 || stringToValidInteger(age) > 24) {
             throw new IllegalArgumentException(INVALID_USER_INFO_MESSAGE);
         }
-        return new User(gender, age);
     }
 
     public static TrainingSession validSession(String description, User user) {
@@ -89,11 +95,10 @@ public class ParserExceptions extends RuntimeException {
         }
 
         int sessionIndex = stringToValidInteger(modifyDetails[0]) -1;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         try {
             LocalDateTime.parse(modifyDetails[1], formatter);
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new IllegalArgumentException(INVALID_MODIFY_DETAILS_MESSAGE);
         }
 
@@ -135,37 +140,37 @@ public class ParserExceptions extends RuntimeException {
         }
 
         switch (exerciseAcronym) {
-        case "PU":
+        case PULL_UP_ACRONYM:
             if (stringToValidInteger(exerciseData) == -1) {
                 throw new IllegalArgumentException(INVALID_PULL_UP_REPETITIONS_MESSAGE + exerciseData
                         + System.lineSeparator() + EXAMPLE_PULL_UP_REPETITIONS_FORMAT);
             }
             break;
-        case "SR":
+        case SHUTTLE_RUN_ACRONYM:
             if(!exerciseData.matches("\\d+\\.\\d")){
                 throw new IllegalArgumentException(INVALID_SHUTTLE_RUN_TIMING_MESSAGE + exerciseData
                         + System.lineSeparator() + EXAMPLE_SHUTTLE_RUN_TIMING_FORMAT);
             }
             break;
-        case "SAR":
+        case SIT_AND_REACH_ACRONYM:
             if (stringToValidInteger(exerciseData) == -1) {
                 throw new IllegalArgumentException(INVALID_SIT_AND_REACH_DISTANCE_MESSAGE + exerciseData
                         + System.lineSeparator() + EXAMPLE_SIT_AND_REACH_DISTANCE_FORMAT);
             }
             break;
-        case "SU":
+        case SIT_UP_ACRONYM:
             if (stringToValidInteger(exerciseData) == -1) {
                 throw new IllegalArgumentException(INVALID_SIT_UP_REPETITIONS_MESSAGE + exerciseData
                         + System.lineSeparator() + EXAMPLE_SIT_UP_REPETITIONS_FORMAT);
             }
             break;
-        case "SBJ":
+        case STANDING_BROAD_JUMP_ACRONYM:
             if (stringToValidInteger(exerciseData) == -1) {
                 throw new IllegalArgumentException(INVALID_STANDING_BROAD_JUMP_DISTANCE_MESSAGE + exerciseData
                         + System.lineSeparator() + EXAMPLE_STANDING_BROAD_JUMP_DISTANCE_FORMAT);
             }
             break;
-        case "WAR":
+        case WALK_AND_RUN_ACRONYM:
             if(!exerciseData.matches("\\d+:[0-5]\\d")){
                 throw new IllegalArgumentException(INVALID_WALK_AND_RUN_TIMING_MESSAGE + exerciseData
                         + System.lineSeparator() + EXAMPLE_WALK_AND_RUN_TIMING_FORMAT);

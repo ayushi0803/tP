@@ -7,6 +7,7 @@ import fittrack.healthprofile.FoodWaterIntake;
 import fittrack.healthprofile.WaterEntry;
 import fittrack.reminder.Reminder;
 import fittrack.trainingsession.TrainingSession;
+import fittrack.user.User;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,6 +25,9 @@ public class Storage {
 
     public static final String SAVE_FILE = "data/saveFile.txt"; // Path to the save file
     public static final File SAVEFILE = new File(SAVE_FILE); // File object for the save file
+
+    public static final String DATA_DELIMITER = "|";
+    public static final String DATA_DELIMITER_REGEX = "\\|";
 
     /**
      * Initializes the save file by creating the necessary directories and file if they do not exist.
@@ -115,6 +119,8 @@ public class Storage {
             return WaterEntry.fromSaveString(saveString);
         } else if (saveString.startsWith("Food")) {
             return FoodEntry.fromSaveString(saveString);
+        } else if (saveString.startsWith("User")) {
+            return User.fromSaveString(saveString);
         }
         throw new InvalidSaveDataException("Unrecognised Saveable descriptor detected.");
     }
@@ -130,16 +136,21 @@ public class Storage {
      * @param reminderList The list of `Reminder` objects to be saved.
      * @throws IOException If any of the provided lists are null or if an I/O error occurs during writing.
      */
-    public static void updateSaveFile(ArrayList<TrainingSession> sessionList, ArrayList<Goal> goalList,
+    public static void updateSaveFile(User user, ArrayList<TrainingSession> sessionList, ArrayList<Goal> goalList,
                                       ArrayList<Reminder> reminderList,
                                       FoodWaterIntake foodWaterList) throws IOException {
 
         // Determine  provided lists are not null before saving
-        if (sessionList == null || goalList == null || reminderList == null) {
+        if (sessionList == null || goalList == null || reminderList == null || foodWaterList == null) {
             throw new IOException("Save file could not be updated. Invalid null list passed to function");
         }
 
         try (FileWriter fw = new FileWriter(SAVEFILE)) {
+
+            // Update user information
+            fw.write(user.toSaveString());
+            fw.write(System.lineSeparator());
+
             for (TrainingSession session : sessionList) {
                 // Assert that session objects are valid
                 assert session != null : "Training session must not be null";

@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import static fittrack.storage.Storage.DATA_DELIMITER;
+import static fittrack.storage.Storage.DATA_DELIMITER_REGEX;
+
 /**
  * Represents a record of water intake with a specific amount and timestamp.
  */
@@ -77,7 +80,7 @@ public class WaterEntry extends Saveable {
      */
     @Override
     public String toSaveString() {
-        return "Water" + "|" + amount + "|" + getFormattedDateTime();
+        return "Water" + DATA_DELIMITER + amount + DATA_DELIMITER + getFormattedDateTime();
     }
 
     /**
@@ -88,7 +91,7 @@ public class WaterEntry extends Saveable {
      * @throws IllegalArgumentException if the save string format is invalid.
      */
     public static WaterEntry fromSaveString(String saveString) {
-        String[] stringData = saveString.split("\\|");
+        String[] stringData = saveString.split(DATA_DELIMITER_REGEX);
 
         // Validate format of save string
         if (stringData.length < 3 || !stringData[0].equals("Water")) {

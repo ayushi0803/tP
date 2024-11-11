@@ -161,7 +161,7 @@ public class Ui {
         beginSegment();
         System.out.println(ADD_REMINDER_MESSAGE);
         System.out.print(reminderList.size() + ". ");
-        reminderList.get(reminderList.size() - 1).printReminderDescription();
+        reminderList.get(reminderList.size() - 1).printReminderInformation();
         printReminderCount(reminderList);
         endSegment();
     }
@@ -191,7 +191,7 @@ public class Ui {
         int index = 0;
         while (index < upcomingReminders.size()) {
             System.out.print(index + 1 + ". ");
-            upcomingReminders.get(index).printReminderDescription();
+            upcomingReminders.get(index).printReminderInformation();
             index++;
         }
         System.out.println("You have " + reminderList.size() + " reminders in total. View them with 'list-remind'.");
@@ -204,7 +204,7 @@ public class Ui {
 
         beginSegment();
         System.out.print(DELETE_REMINDER_MESSAGE);
-        reminderToDelete.printReminderDescription();
+        reminderToDelete.printReminderInformation();
         printReminderCount(reminderList);
         endSegment();
     }
@@ -222,7 +222,7 @@ public class Ui {
         System.out.println(LIST_REMINDER_MESSAGE);
         while (index < reminderList.size()) {
             System.out.print(index + 1 + ". ");
-            reminderList.get(index).printReminderDescription();
+            reminderList.get(index).printReminderInformation();
             index++;
         }
         printReminderCount(reminderList);

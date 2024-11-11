@@ -1,4 +1,0 @@
-TrainingSession|session1|10/11/2024 12:56|MALE|12|No mood recorded|0|0|-1|0|0|-1|
-TrainingSession|session2|10/11/2024 12:56|MALE|12|No mood recorded|0|0|-1|0|0|-1|
-Food|Apple|100|07/11/2024 22:34
-Water|100|07/11/2024 22:34

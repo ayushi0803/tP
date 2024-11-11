@@ -36,7 +36,8 @@ I implemented the following classes, exceptions and functions which handle data 
 ## Documentation:
 ### User Guide:
 
-Documented the following features: User initialisation, Help function, Add Training Session, List all Training Sessions, View a Training Session, Edit a Training Session, Delete a Training Session and Exiting the program.
+Documented the following features: User initialisation, Help function, Add Training Session, Modify Taining Session,
+List all Training Sessions, View a Training Session, Edit a Training Session, Delete a Training Session and Exiting the program.
 
 For each feature, I detailed its Purpose, Format, an Example and its Expected Output.
 
@@ -44,9 +45,10 @@ For each feature, I detailed its Purpose, Format, an Example and its Expected Ou
 
 Documented the Project Architecture and created the Architecture Diagram.
 
-Documented Storage, Set User, Add Training Session, Delete Training Session, List Training Session and View Training Session, with a class diagram for each.
+Documented Set User, Add Training Session, Modify Training Session, Delete Training Session, List Training Session 
+and View Training Session, with a sequence diagram for each.
 
-Wrote 9 User Stories to give better perspective on project requirements and direction
+Wrote 10 User Stories to give better perspective on project requirements and direction
 
 ## Project Management:
 ### Contributions to team-based tasks
@@ -55,4 +57,4 @@ Administrated the issue tracker (creating issues, assigning contributors, issue 
 Maintained user/developer docs that are not specific to a feature (Architecture, User Stories, etc).
 
 ### Review/mentoring contributions:
-Responsible for reviewing and providing feedback on half of the team's PRs.
+Responsible for reviewing and providing feedback on many issues and PRs.

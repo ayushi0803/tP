@@ -275,6 +275,8 @@ ________________________________________________________________________________
 ```
 
 
+
+
 ### 15. Delete Goal: `delete-goal`
 User can delete a fitness goal to the the list
 of goals to moderate a fitness goal.
@@ -289,7 +291,6 @@ ________________________________________________________________________________
 Goal at index 1 has been removed.
 ____________________________________________________________________________________________________
 ```
-
 
 ### 16. List of Goals: `list-goal`
 View a list of all fitness goals and deadlines

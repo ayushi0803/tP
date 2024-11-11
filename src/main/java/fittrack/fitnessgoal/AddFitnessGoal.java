@@ -20,6 +20,10 @@ public class AddFitnessGoal {
      * @param deadline Optional deadline for the fitness goal.
      */
     public AddFitnessGoal(String goalDescription, LocalDateTime deadline) {
+        if (goalDescription == null || goalDescription.isEmpty()) {
+            throw new IllegalArgumentException("Description cannot be null or empty.");
+        }
+
         this.goalDescription = goalDescription;
         this.deadline = deadline;
     }

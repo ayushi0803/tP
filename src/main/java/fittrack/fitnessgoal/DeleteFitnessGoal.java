@@ -27,12 +27,13 @@ public class DeleteFitnessGoal {
      * Attempts to delete the goal from the user's list of goals.
      *
      * @param user The user from whom the goal is to be deleted.
+     * @return
      */
-    public void deleteGoal(User user) {
+    public boolean deleteGoal(User user) {
         // Check if the user object is null to avoid null pointer exceptions
         if (user == null) {
             LOGGER.log(Level.WARNING, "User object is null. Goal deletion cannot proceed.");
-            return;
+            return false;
         }
 
         // Attempt to delete the goal and store the result
@@ -44,5 +45,6 @@ public class DeleteFitnessGoal {
         } else {
             LOGGER.log(Level.INFO, "Goal not found: " + goalDescription);
         }
+        return deleted;
     }
 }

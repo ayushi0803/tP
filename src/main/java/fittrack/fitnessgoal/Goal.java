@@ -63,10 +63,11 @@ public class Goal extends Saveable {
     public static Goal fromSaveString(String saveString) {
         // Split the string by the " | " delimiter
         String[] stringData = saveString.split(" \\| ");
+        String[] parts = saveString.split(";");
+        System.out.println("Parts length: " + parts.length); // Debug log
 
-        // Check if the format is correct
-        if (stringData.length < 2 || !stringData[0].equals("Goal")) {
-            throw new IllegalArgumentException("Invalid save string format for Goal: " + saveString);
+        if (parts.length < 2) {
+            System.out.println("Save string received: " + saveString); // Add this for debugging
         }
 
         String goalDescription = stringData[1];

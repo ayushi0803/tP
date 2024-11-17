@@ -423,8 +423,18 @@ public class Parser {
                     // Parse the water amount
                     long parsedAmount = Long.parseLong(description); // Allow larger input temporarily
 
+                    // Check if the water amount is zero
+                    if (parsedAmount == 0) {
+                        System.out.println("Warning: You cannot enter 0ml of water. Please enter a"
+                            + " valid amount greater than zero.");
+                        System.out.print("Enter the amount of water (in ml): ");
+                        description = new Scanner(System.in).nextLine().trim(); // Take new input from the user
+                        continue; // Restart the loop for the new input
+                    }
+
                     if (parsedAmount < minWaterAmount || parsedAmount > maxWaterAmount) {
-                        System.out.println("Invalid water amount: Please enter a value between " + minWaterAmount + " and " + maxWaterAmount + " ml.");
+                        System.out.println("Invalid water amount: Please enter a value between "
+                            + minWaterAmount + " and " + maxWaterAmount + " ml.");
                         System.out.print("Enter the amount of water (in ml): ");
                         description = new Scanner(System.in).nextLine().trim(); // Take new input from the user
                         continue; // Restart the loop for the new input
@@ -434,7 +444,8 @@ public class Parser {
                     foodWaterList.addWater(new WaterEntry(waterAmount, LocalDateTime.now()));
 
                     System.out.println(SEPARATOR);
-                    System.out.println("Got it. I've added " + waterAmount + " ml of water at " + formattedTimeNow + ".");
+                    System.out.println("Got it. I've added " + waterAmount + " ml of water at "
+                        + formattedTimeNow + ".");
                     System.out.println(SEPARATOR);
                     updateSaveFile(user, sessionList, goalList, reminderList, foodWaterList);
 

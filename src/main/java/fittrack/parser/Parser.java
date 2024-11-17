@@ -406,50 +406,50 @@ public class Parser {
             }
             break;
 
-            case ADD_WATER_COMMAND:
-                boolean isValidInput = false; // Flag to check if input is valid
-                long minWaterAmount = 1; // Minimum valid water amount (1 ml)
-                long maxWaterAmount = Integer.MAX_VALUE; // Maximum valid water amount (2147483647 ml)
+        case ADD_WATER_COMMAND:
+            boolean isValidInput = false; // Flag to check if input is valid
+            long minWaterAmount = 1; // Minimum valid water amount (1 ml)
+            long maxWaterAmount = Integer.MAX_VALUE; // Maximum valid water amount (2147483647 ml)
 
-                while (!isValidInput) {
-                    if (description.isEmpty() || !description.matches("\\d+")) {
-                        System.out.println("Invalid water amount: Please enter a reasonable amount in ml.");
+            while (!isValidInput) {
+                if (description.isEmpty() || !description.matches("\\d+")) {
+                    System.out.println("Invalid water amount: Please enter a reasonable amount in ml.");
+                    System.out.print("Enter the amount of water (in ml): ");
+                    description = new Scanner(System.in).nextLine().trim(); // Take new input from the user
+                    continue; // Restart the loop for the new input
+                }
+
+                try {
+                    // Parse the water amount
+                    long parsedAmount = Long.parseLong(description); // Allow larger input temporarily
+
+                    if (parsedAmount < minWaterAmount || parsedAmount > maxWaterAmount) {
+                        System.out.println("Invalid water amount: Please enter a value between " + minWaterAmount + " and " + maxWaterAmount + " ml.");
                         System.out.print("Enter the amount of water (in ml): ");
                         description = new Scanner(System.in).nextLine().trim(); // Take new input from the user
                         continue; // Restart the loop for the new input
                     }
 
-                    try {
-                        // Parse the water amount
-                        long parsedAmount = Long.parseLong(description); // Allow larger input temporarily
+                    int waterAmount = (int) parsedAmount; // Safely cast to int as parsedAmount is within valid range
+                    foodWaterList.addWater(new WaterEntry(waterAmount, LocalDateTime.now()));
 
-                        if (parsedAmount < minWaterAmount || parsedAmount > maxWaterAmount) {
-                            System.out.println("Invalid water amount: Please enter a value between " + minWaterAmount + " and " + maxWaterAmount + " ml.");
-                            System.out.print("Enter the amount of water (in ml): ");
-                            description = new Scanner(System.in).nextLine().trim(); // Take new input from the user
-                            continue; // Restart the loop for the new input
-                        }
+                    System.out.println(SEPARATOR);
+                    System.out.println("Got it. I've added " + waterAmount + " ml of water at " + formattedTimeNow + ".");
+                    System.out.println(SEPARATOR);
+                    updateSaveFile(user, sessionList, goalList, reminderList, foodWaterList);
 
-                        int waterAmount = (int) parsedAmount; // Safely cast to int as parsedAmount is within valid range
-                        foodWaterList.addWater(new WaterEntry(waterAmount, LocalDateTime.now()));
-
-                        System.out.println(SEPARATOR);
-                        System.out.println("Got it. I've added " + waterAmount + " ml of water at " + formattedTimeNow + ".");
-                        System.out.println(SEPARATOR);
-                        updateSaveFile(user, sessionList, goalList, reminderList, foodWaterList);
-
-                        isValidInput = true; // Input is valid; exit the loop
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid water amount: Please enter a reasonable amount in ml.");
-                        System.out.print("Enter the amount of water (in ml): ");
-                        description = new Scanner(System.in).nextLine().trim(); // Take new input from the user
-                    } catch (Exception e) {
-                        System.out.println("An unexpected error occurred: " + e.getMessage());
-                        System.out.print("Enter the amount of water (in ml): ");
-                        description = new Scanner(System.in).nextLine().trim(); // Take new input from the user
-                    }
+                    isValidInput = true; // Input is valid; exit the loop
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid water amount: Please enter a reasonable amount in ml.");
+                    System.out.print("Enter the amount of water (in ml): ");
+                    description = new Scanner(System.in).nextLine().trim(); // Take new input from the user
+                } catch (Exception e) {
+                    System.out.println("An unexpected error occurred: " + e.getMessage());
+                    System.out.print("Enter the amount of water (in ml): ");
+                    description = new Scanner(System.in).nextLine().trim(); // Take new input from the user
                 }
-                break;
+            }
+            break;
 
 
             case DELETE_WATER_COMMAND:

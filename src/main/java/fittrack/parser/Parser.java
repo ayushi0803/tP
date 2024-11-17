@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 // Import enums, exceptions, and message constants for input parsing and validation
 import static fittrack.enums.Exercise.fromUserInput;
@@ -405,25 +406,53 @@ public class Parser {
             }
             break;
 
-        case ADD_WATER_COMMAND:
-            // Check if description is empty or not a valid single numeral
-            if (description.isEmpty() || !description.matches("\\d+")) {
-                System.out.println("Invalid water format: Please use 'add-water' + (water in ml)");
+            case ADD_WATER_COMMAND:
+                boolean isValidInput = false; // Flag to check if input is valid
+                long minWaterAmount = 1; // Minimum valid water amount (1 ml)
+                long maxWaterAmount = Integer.MAX_VALUE; // Maximum valid water amount (2147483647 ml)
+
+                while (!isValidInput) {
+                    if (description.isEmpty() || !description.matches("\\d+")) {
+                        System.out.println("Invalid water amount: Please enter a reasonable amount in ml.");
+                        System.out.print("Enter the amount of water (in ml): ");
+                        description = new Scanner(System.in).nextLine().trim(); // Take new input from the user
+                        continue; // Restart the loop for the new input
+                    }
+
+                    try {
+                        // Parse the water amount
+                        long parsedAmount = Long.parseLong(description); // Allow larger input temporarily
+
+                        if (parsedAmount < minWaterAmount || parsedAmount > maxWaterAmount) {
+                            System.out.println("Invalid water amount: Please enter a value between " + minWaterAmount + " and " + maxWaterAmount + " ml.");
+                            System.out.print("Enter the amount of water (in ml): ");
+                            description = new Scanner(System.in).nextLine().trim(); // Take new input from the user
+                            continue; // Restart the loop for the new input
+                        }
+
+                        int waterAmount = (int) parsedAmount; // Safely cast to int as parsedAmount is within valid range
+                        foodWaterList.addWater(new WaterEntry(waterAmount, LocalDateTime.now()));
+
+                        System.out.println(SEPARATOR);
+                        System.out.println("Got it. I've added " + waterAmount + " ml of water at " + formattedTimeNow + ".");
+                        System.out.println(SEPARATOR);
+                        updateSaveFile(user, sessionList, goalList, reminderList, foodWaterList);
+
+                        isValidInput = true; // Input is valid; exit the loop
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid water amount: Please enter a reasonable amount in ml.");
+                        System.out.print("Enter the amount of water (in ml): ");
+                        description = new Scanner(System.in).nextLine().trim(); // Take new input from the user
+                    } catch (Exception e) {
+                        System.out.println("An unexpected error occurred: " + e.getMessage());
+                        System.out.print("Enter the amount of water (in ml): ");
+                        description = new Scanner(System.in).nextLine().trim(); // Take new input from the user
+                    }
+                }
                 break;
-            }
 
-            int waterAmount = Integer.parseInt(description);
 
-            foodWaterList.addWater(new WaterEntry(waterAmount, LocalDateTime.now()));
-
-            System.out.println(SEPARATOR);
-            System.out.println("Got it. I've added " + waterAmount + "ml of water at " +
-                formattedTimeNow + ".");
-            System.out.println(SEPARATOR);
-            updateSaveFile(user, sessionList, goalList, reminderList, foodWaterList);
-            break;
-
-        case DELETE_WATER_COMMAND:
+            case DELETE_WATER_COMMAND:
             // Check if description is empty or not a valid single numeral
             if (description.isEmpty() || !description.matches("\\d+")) {
                 System.out.println("Invalid format: Please provide a valid water index number.");

@@ -463,7 +463,7 @@ public class Parser {
             break;
 
 
-            case DELETE_WATER_COMMAND:
+        case DELETE_WATER_COMMAND:
             // Check if description is empty or not a valid single numeral
             if (description.isEmpty() || !description.matches("\\d+")) {
                 System.out.println("Invalid format: Please provide a valid water index number.");
